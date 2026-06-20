@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
 
 urlpatterns = [
-    path('', lambda request: HttpResponse("Nutri Fit is running 🚀")),
+    path("admin/", admin.site.urls),
 
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('', include('home.urls')),
+    path("accounts/", include("allauth.urls")),
+    path("", include("home.urls")),
+
+    path("nutrition/", include("nutrition.urls")),
+    path("workouts/", include("workouts.urls")),
+    path("payments/", include("payments.urls")),
 ]
