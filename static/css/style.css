@@ -1,0 +1,23 @@
+:root {
+
+  /* Typography */
+  --primary-font: "Poppins", sans-serif;
+  --secondary-font: "Playfair Display", serif;
+  --accent-font: "Cormorant Garamond", serif;
+
+  /* Brand Palette */
+  --primary-color: #142522;         /* Deep forest green */
+  --secondary-color: #dbb552;       /* Warm gold */
+  --accent-color: #7a9b85;          /* Sage green */
+  --accent-color-dark: #2d413a;     /* Dark muted green */
+
+  /* Supporting Colors */
+  --gold-dark: #9f8d51;             /* Antique gold */
+  --gold-light: #d0b361;            /* Soft golden */
+  --earth-tone: #5e582f;            /* Olive brown */
+
+  /* Text */
+  --text-color: #142522;
+  --text-muted: #5e582f;
+
+}
