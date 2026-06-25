@@ -21,3 +21,142 @@
   --text-muted: #5e582f;
 
 }
+
+#navbar {
+    background-color: var(--primary-color);
+    padding: 0.3rem;
+}
+
+#navbar .navbar-brand {
+    color: var(--secondary-color);
+}
+
+#navbar .nav-link {
+    color: white;
+    font-family: var(--primary-font);
+    font-weight: 500;
+    margin-left: 1rem;
+    transition: 0.3s ease;
+}
+
+#navbar .nav-link:hover {
+    color: var(--secondary-color);
+}
+
+#navbar .nav-link.active {
+    color: var(--secondary-color);
+}
+
+#navbar .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+#navbar .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* Login button */
+
+#navbar .btn {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 22px;
+    font-weight: 600;
+}
+
+#navbar .btn:hover {
+    background-color: var(--gold-light);
+    color: var(--primary-color);
+}
+
+/* HERO SECTION */
+
+.hero-section {
+    position: relative;
+    min-height: 85vh;
+    background-image: url("/static/images/nutrifit_imagehero.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            rgba(20, 37, 34, 0.70),
+            rgba(20, 37, 34, 0.45)
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero-title {
+    font-family: var(--secondary-font);
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-family: var(--primary-font);
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-primary-btn {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.hero-primary-btn:hover {
+    background-color: var(--gold-light);
+}
+
+.hero-secondary-btn {
+    border: 2px solid white;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 30px;
+}
+
+.hero-secondary-btn:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+.hero-title {
+    font-size: 2.6rem;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+}
+
+}
