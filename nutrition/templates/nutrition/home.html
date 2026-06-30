@@ -1,1 +1,160 @@
-<h1>Register Page</h1>
+<h1>Register Page</h1>{% extends "base.html" %}
+
+{% block title %}
+Nutrition Plans | NutriFit Healthy
+{% endblock %}
+
+{% block content %}
+
+<section class="about-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h1 class="hero-title">
+                Nutrition Plans
+            </h1>
+
+            <p class="hero-subtitle">
+
+                Choose a personalised nutrition plan to support your goals.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="card feature-card h-100">
+
+                    <div class="card-body">
+
+                        <h3 class="card-title">
+                            Weight Loss
+                        </h3>
+
+                        <p class="card-text">
+                            Balanced nutrition designed for healthy weight management.
+                        </p>
+
+                        <a href="#"
+                           class="btn hero-primary-btn">
+
+                            Select Plan
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card feature-card h-100">
+
+                    <div class="card-body">
+
+                        <h3 class="card-title">
+                            Muscle Gain
+                        </h3>
+
+                        <p class="card-text">
+                            High-protein meal structure to support growth.
+                        </p>
+
+                        <a href="#"
+                           class="btn hero-primary-btn">
+
+                            Select Plan
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card feature-card h-100">
+
+                    <div class="card-body">
+
+                        <h3 class="card-title">
+                            Pregnancy Nutrition
+                        </h3>
+
+                        <p class="card-text">
+                            Nutrition guidance adapted for pregnancy.
+                        </p>
+
+                        <a href="#"
+                           class="btn hero-primary-btn">
+
+                            Select Plan
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Footer -->
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Brand -->
+    <div class="footer-column">
+      <h3 class="footer-logo">NutriFit Healthy</h3>
+
+      <p>
+        Personalised nutrition and training designed for sustainable, healthy
+        living.
+      </p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="footer-column">
+      <h4>Explore</h4>
+
+      <ul>
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/nutrition/">Nutrition</a></li>
+
+        <li><a href="/workouts/">Workouts</a></li>
+
+        <li><a href="/about-section/">About</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-column">
+      <h4>Get in Touch</h4>
+
+      <ul>
+        <li>Email: hello@nutrifithealthy.com</li>
+
+        <li>Instagram: @nutrifithealthy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">© 2026 NutriFit Healthy • All Rights Reserved</div>
+</footer>
+
+{% endblock %}
