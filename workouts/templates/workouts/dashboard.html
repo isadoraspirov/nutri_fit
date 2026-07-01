@@ -7,154 +7,79 @@ Workouts | NutriFit Healthy
 {% block content %}
 
 <section class="about-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="hero-title">Workout Plans</h1>
 
-    <div class="container">
-
-        <div class="text-center mb-5">
-
-            <h1 class="hero-title">
-                Workout Plans
-            </h1>
-
-            <p class="hero-subtitle">
-
-                Find a workout plan that matches your lifestyle.
-
-            </p>
-
-        </div>
-
-        <div class="row g-4">
-
-            <div class="col-md-4">
-
-                <div class="card feature-card h-100">
-
-                    <div class="card-body">
-
-                        <h3 class="card-title">
-                            Beginner
-                        </h3>
-
-                        <p class="card-text">
-                            Build consistency with guided beginner workouts.
-                        </p>
-
-                        <a href="#"
-                           class="btn hero-primary-btn">
-
-                            Start
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="card feature-card h-100">
-
-                    <div class="card-body">
-
-                        <h3 class="card-title">
-                            Strength
-                        </h3>
-
-                        <p class="card-text">
-                            Structured sessions focused on strength and endurance.
-                        </p>
-
-                        <a href="#"
-                           class="btn hero-primary-btn">
-
-                            Start
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="card feature-card h-100">
-
-                    <div class="card-body">
-
-                        <h3 class="card-title">
-                            Home Training
-                        </h3>
-
-                        <p class="card-text">
-                            Flexible workouts designed for home sessions.
-                        </p>
-
-                        <a href="#"
-                           class="btn hero-primary-btn">
-
-                            Start
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- Footer -->
-
-<footer class="site-footer">
-  <div class="footer-container">
-    <!-- Brand -->
-    <div class="footer-column">
-      <h3 class="footer-logo">NutriFit Healthy</h3>
-
-      <p>
-        Personalised nutrition and training designed for sustainable, healthy
-        living.
+      <p class="hero-subtitle">
+        Find a workout plan that matches your lifestyle.
       </p>
     </div>
 
-    <!-- Navigation -->
-    <div class="footer-column">
-      <h4>Explore</h4>
+    <div class="row g-4">
 
-      <ul>
-        <li><a href="/">Home</a></li>
+      <!-- Beginner -->
+      <div class="col-md-4">
+        <div class="card feature-card h-100">
+          <div class="card-body">
+            <h3 class="card-title">Beginner</h3>
 
-        <li><a href="/nutrition/">Nutrition</a></li>
+            <p class="card-text">
+              Build consistency with guided beginner workouts.
+            </p>
 
-        <li><a href="/workouts/">Workouts</a></li>
+            <a
+              href="{% url 'view_cart' %}?plan=beginner"
+              class="btn hero-primary-btn"
+            >
+              Start
+            </a>
+          </div>
+        </div>
+      </div>
 
-        <li><a href="/about-section/">About</a></li>
-      </ul>
-    </div>
+      <!-- Strength -->
+      <div class="col-md-4">
+        <div class="card feature-card h-100">
+          <div class="card-body">
+            <h3 class="card-title">Strength</h3>
 
-    <!-- Contact -->
-    <div class="footer-column">
-      <h4>Get in Touch</h4>
+            <p class="card-text">
+              Structured sessions focused on strength and endurance.
+            </p>
 
-      <ul>
-        <li>Email: hello@nutrifithealthy.com</li>
+            <a
+              href="{% url 'view_cart' %}?plan=strength"
+              class="btn hero-primary-btn"
+            >
+              Start
+            </a>
+          </div>
+        </div>
+      </div>
 
-        <li>Instagram: @nutrifithealthy</li>
-      </ul>
+      <!-- Home -->
+      <div class="col-md-4">
+        <div class="card feature-card h-100">
+          <div class="card-body">
+            <h3 class="card-title">Home Training</h3>
+
+            <p class="card-text">
+              Flexible workouts designed for home sessions.
+            </p>
+
+            <a
+              href="{% url 'view_cart' %}?plan=home-training"
+              class="btn hero-primary-btn"
+            >
+              Start
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <div class="footer-bottom">© 2026 NutriFit Healthy • All Rights Reserved</div>
-</footer>
+</section>
 
 {% endblock %}

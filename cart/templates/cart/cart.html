@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %} Your Plans | NutriFit Healthy
+{%endblock %} {% block content %}
+<section class="auth-section">
+  <div class="auth-card">
+    <h1>Your Selected Plans</h1>
+
+    {% if selected_plans %}
+
+    <ul>
+      {% for plan in selected_plans %}
+
+      <li>{{ plan.name }}</li>
+
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'payments:checkout' %}" class="btn hero-primary-btn">
+      Continue to Payment
+    </a>
+
+    {% else %}
+
+    <p>You haven't selected any plans yet.</p>
+
+    <a href="{% url 'nutrition_home' %}" class="btn hero-primary-btn">
+      Browse Nutrition Plans
+    </a>
+
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

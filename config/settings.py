@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'nutrition',
     'workouts',
     'payments',
+    'cart',
 
 ]
 
@@ -71,6 +72,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                "cart.contexts.cart_contents",
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request', # required by allauth
                 'django.contrib.auth.context_processors.auth',
