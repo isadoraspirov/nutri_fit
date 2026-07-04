@@ -1,6 +1,17 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import NutritionPlan
+
 
 def home(request):
-    return render(request, "nutrition/home.html")
+    plans = NutritionPlan.objects.all()
+
+    context = {
+        "plans": plans,
+    }
+
+    return render(
+        request,
+        "nutrition/home.html",
+        context,
+    )

@@ -1,33 +1,70 @@
-{% extends "base.html" %} {% block title %} Your Plans | NutriFit Healthy
-{%endblock %} {% block content %}
+{% extends "base.html" %}
+
+{% block title %}
+Your Cart | NutriFit Healthy
+{% endblock %}
+
+{% block content %}
+
 <section class="auth-section">
-  <div class="auth-card">
-    <h1>Your Selected Plans</h1>
+    <div class="auth-card">
 
-    {% if selected_plans %}
+        <h1>Your Cart</h1>
 
-    <ul>
-      {% for plan in selected_plans %}
+        {% if cart_items %}
 
-      <li>{{ plan.name }}</li>
+            <ul class="list-group mb-4">
 
-      {% endfor %}
-    </ul>
+                {% for item in cart_items %}
 
-    <a href="{% url 'payments:checkout' %}" class="btn hero-primary-btn">
-      Continue to Payment
-    </a>
+                    <li class="list-group-item">
 
-    {% else %}
+                        <h5>{{ item.plan.name }}</h5>
 
-    <p>You haven't selected any plans yet.</p>
+                        <p>{{ item.plan.description }}</p>
 
-    <a href="{% url 'nutrition_home' %}" class="btn hero-primary-btn">
-      Browse Nutrition Plans
-    </a>
+                        <p>
+                            <strong>Price:</strong>
+                            £{{ item.plan.price }}
+                        </p>
 
-    {% endif %}
-  </div>
+                        <p>
+                            <strong>Quantity:</strong>
+                            {{ item.quantity }}
+                        </p>
+
+                        <p>
+                            <strong>Subtotal:</strong>
+                            £{{ item.subtotal }}
+                        </p>
+
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+            <h4 class="mb-3">
+                Total: £{{ total }}
+            </h4>
+
+            <a href="{% url 'payments:checkout' %}"
+               class="btn hero-primary-btn">
+                Continue to Payment
+            </a>
+
+        {% else %}
+
+            <p>You haven't selected any plans yet.</p>
+
+            <a href="{% url 'nutrition_home' %}"
+               class="btn hero-primary-btn">
+                Browse Nutrition Plans
+            </a>
+
+        {% endif %}
+
+    </div>
 </section>
 
 {% endblock %}
