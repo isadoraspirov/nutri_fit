@@ -21,6 +21,7 @@ def add_to_cart(request, plan_id):
         cart[plan_id] = 1
 
     request.session["cart"] = cart
+    print("Cart after adding:", request.session["cart"])
 
     messages.success(
         request,

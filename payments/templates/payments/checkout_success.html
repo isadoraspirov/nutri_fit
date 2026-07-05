@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+Order Complete | NutriFit
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-card">
+
+        <h1>🎉 Thank You!</h1>
+
+        <p>
+            Your nutrition plan has been purchased successfully.
+        </p>
+
+        <hr>
+
+        <p>
+            <strong>Order Number</strong><br>
+            {{ order.order_number }}
+        </p>
+
+        <p>
+            <strong>Name</strong><br>
+            {{ order.full_name }}
+        </p>
+
+        <p>
+            <strong>Email</strong><br>
+            {{ order.email }}
+        </p>
+
+        <hr>
+
+        <h3>Your Plans</h3>
+
+        <ul>
+
+            {% for item in order.items.all %}
+
+                <li>
+                    {{ item.nutrition_plan.name }}
+                    × {{ item.quantity }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+        <hr>
+
+        <h4>
+            Total Paid:
+            £{{ order.order_total }}
+        </h4>
+
+        <a
+            href="{% url 'nutrition_home' %}"
+            class="btn hero-primary-btn"
+        >
+            Continue Browsing
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
