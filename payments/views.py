@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import (
     get_object_or_404,
@@ -7,6 +8,7 @@ from django.shortcuts import (
 from django.urls import reverse
 
 from nutrition.models import NutritionPlan
+
 from .forms import OrderForm
 from .models import Order, OrderItem
 
@@ -28,12 +30,16 @@ def checkout(request):
 
         if order_form.is_valid():
 
+            # Create the order
             order = order_form.save()
 
-            # Create one OrderItem for each plan in the cart
+            # Create one OrderItem for each nutrition plan
             for plan_id, quantity in cart.items():
 
-                plan = NutritionPlan.objects.get(pk=plan_id)
+                plan = get_object_or_404(
+                    NutritionPlan,
+                    pk=plan_id,
+                )
 
                 OrderItem.objects.create(
                     order=order,
@@ -44,12 +50,13 @@ def checkout(request):
 
             # Calculate the order total
             order.order_total = sum(
-                item.line_total for item in order.items.all()
+                item.line_total
+                for item in order.items.all()
             )
 
             order.save()
 
-            # Empty the cart
+            # Empty the shopping cart
             del request.session["cart"]
 
             messages.success(
@@ -67,6 +74,7 @@ def checkout(request):
 
     context = {
         "order_form": order_form,
+        "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
     }
 
     return render(
