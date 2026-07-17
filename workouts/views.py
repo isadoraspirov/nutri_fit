@@ -1,6 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import WorkoutPlan
+
 
 def dashboard(request):
-    return render(request, "workouts/dashboard.html")
+    workout_plans = WorkoutPlan.objects.all()
+
+    context = {
+        "workout_plans": workout_plans,
+    }
+
+    return render(request, "workouts/dashboard.html", context)
