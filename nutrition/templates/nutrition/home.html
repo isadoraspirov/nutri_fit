@@ -41,7 +41,7 @@ Nutrition Plans | NutriFit Healthy
 
                         <p>{{ plan.duration_weeks }} weeks</p>
 
-                        <a href="{% url 'add_to_cart' plan.id %}"
+                        <a href="{% url 'cart:add_to_cart' plan.id %}"
                            class="btn hero-primary-btn">
                             Select Plan
                         </a>
