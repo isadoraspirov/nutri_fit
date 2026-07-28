@@ -1,68 +1,105 @@
 {% extends "base.html" %}
 
 {% block title %}
-Order Complete | NutriFit
+Order Complete | NutriFit Healthy
 {% endblock %}
 
 {% block content %}
 
-<section class="auth-section">
+<section class="auth-section py-5">
 
-    <div class="auth-card">
+    <div class="container">
 
-        <h1>Thank You!</h1>
+        <div class="row justify-content-center">
 
-        <p>
-            Your nutrition plan has been purchased successfully.
-        </p>
+            <div class="col-md-8 col-lg-6">
 
-        <hr>
+                <div class="auth-card">
 
-        <p>
-            <strong>Order Number</strong><br>
-            {{ order.order_number }}
-        </p>
+                    <div class="text-center mb-4">
 
-        <p>
-            <strong>Name</strong><br>
-            {{ order.full_name }}
-        </p>
+                        <h1>Thank You!</h1>
 
-        <p>
-            <strong>Email</strong><br>
-            {{ order.email }}
-        </p>
+                        <p>
+                            Your order has been created successfully.
+                        </p>
 
-        <hr>
+                    </div>
 
-        <h3>Your Plans</h3>
+                    <hr>
 
-        <ul>
+                    <p>
+                        <strong>Order Number</strong><br>
+                        {{ order.order_number }}
+                    </p>
 
-            {% for item in order.items.all %}
+                    <p>
+                        <strong>Name</strong><br>
+                        {{ order.full_name }}
+                    </p>
 
-                <li>
-                    {{ item.nutrition_plan.name }}
-                    × {{ item.quantity }}
-                </li>
+                    <p>
+                        <strong>Email</strong><br>
+                        {{ order.email }}
+                    </p>
 
-            {% endfor %}
+                    <hr>
 
-        </ul>
+                    <h3>Your Plans</h3>
 
-        <hr>
+                    <ul class="list-group mb-4">
 
-        <h4>
-            Total Paid:
-            £{{ order.order_total }}
-        </h4>
+                        {% for item in order.items.all %}
 
-        <a
-            href="{% url 'nutrition_home' %}"
-            class="btn hero-primary-btn"
-        >
-            Continue Browsing
-        </a>
+                            <li class="list-group-item d-flex justify-content-between">
+
+                                <span>
+                                    {% if item.nutrition_plan %}
+                                        {{ item.nutrition_plan.name }}
+                                    {% elif item.workout_plan %}
+                                        {{ item.workout_plan.name }}
+                                    {% else %}
+                                        Plan unavailable
+                                    {% endif %}
+                                </span>
+
+                                <span>
+                                    × {{ item.quantity }}
+                                </span>
+
+                            </li>
+
+                        {% empty %}
+
+                            <li class="list-group-item">
+                                No plans were found for this order.
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                    <h4 class="mb-4">
+                        Total:
+                        £{{ order.order_total }}
+                    </h4>
+
+                    <div class="text-center">
+
+                        <a
+                            href="{% url 'nutrition_home' %}"
+                            class="btn hero-primary-btn"
+                        >
+                            Continue Browsing
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
