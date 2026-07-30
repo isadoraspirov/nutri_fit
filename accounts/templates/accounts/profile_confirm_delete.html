@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+Delete My Details | NutriFit Healthy
+{% endblock %}
+
+{% block content %}
+
+<section class="py-5">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <div class="card feature-card text-center">
+                    <div class="card-body p-5">
+
+                        <h1 class="h2 mb-3">
+                            Delete My Details
+                        </h1>
+
+                        <p class="mb-4">
+                            Are you sure you want to delete your saved
+                            personal details?
+                        </p>
+
+                        <p class="text-muted mb-4">
+                            Your order history will not be deleted.
+                            This action only removes your saved contact
+                            and address information.
+                        </p>
+
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            <div
+                                class="d-flex flex-column flex-sm-row
+                                justify-content-center gap-3"
+                            >
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger"
+                                >
+                                    Yes, Delete My Details
+                                </button>
+
+                                <a
+                                    href="{% url 'profile_detail' %}"
+                                    class="btn btn-outline-secondary"
+                                >
+                                    Cancel
+                                </a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
