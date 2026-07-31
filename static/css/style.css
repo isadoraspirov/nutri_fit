@@ -420,3 +420,37 @@
   border-color: var(--secondary-color) !important;
   box-shadow: 0 0 0 4px rgba(219,181,82,.15) !important;
 }
+
+/* My Account Dropdown */
+
+.account-dropdown {
+    min-width: 230px;
+    padding: 0;
+    border: 1px solid rgba(20, 37, 34, 0.15);
+    border-radius: 0;
+    box-shadow: 0 12px 30px rgba(20, 37, 34, 0.15);
+}
+
+.account-dropdown .dropdown-header {
+    padding: 1.25rem;
+    color: var(--primary-color);
+    font-family: var(--secondary-font);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.account-dropdown .dropdown-item {
+    padding: 1rem 1.25rem;
+    color: var(--primary-color);
+    border-top: 1px solid rgba(20, 37, 34, 0.1);
+}
+
+.account-dropdown .dropdown-item:hover,
+.account-dropdown .dropdown-item:focus {
+    color: var(--primary-color);
+    background-color: rgba(219, 181, 82, 0.15);
+}
+
+.account-dropdown .dropdown-divider {
+    margin: 0;
+}

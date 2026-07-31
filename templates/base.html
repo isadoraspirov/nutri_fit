@@ -89,10 +89,11 @@
     <!-- Navbar -->
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark shadow-sm">
       <div class="container">
+
         <a class="navbar-brand" href="{% url 'home' %}">
           <img
             src="{% static 'images/nutrifit_logo.jpg' %}"
-            alt="NutriFit"
+            alt="NutriFit Healthy"
             height="60"
           />
         </a>
@@ -113,7 +114,8 @@
           class="collapse navbar-collapse justify-content-end"
           id="navbarNav"
         >
-          <ul class="navbar-nav align-items-lg-center">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'home' %}">
                 Home
@@ -132,88 +134,130 @@
               </a>
             </li>
 
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="accountDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {% if user.is_authenticated %}
+                  Hello, {{ user.first_name|default:user.username }}
+                {% else %}
+                  My Account
+                {% endif %}
+              </a>
+
+              <ul
+                class="dropdown-menu dropdown-menu-end account-dropdown"
+                aria-labelledby="accountDropdown"
+              >
+                {% if user.is_authenticated %}
+
+                  <li>
+                    <h6 class="dropdown-header">
+                      My Account
+                    </h6>
+                  </li>
+
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'profile_detail' %}"
+                    >
+                      My Details
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'profile_detail' %}#my-orders"
+                    >
+                      My Orders
+                    </a>
+                  </li>
+
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'account_logout' %}"
+                    >
+                      Logout
+                    </a>
+                  </li>
+
+                {% else %}
+
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'account_login' %}"
+                    >
+                      Login
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'account_signup' %}"
+                    >
+                      Sign Up
+                    </a>
+                  </li>
+
+                {% endif %}
+              </ul>
+            </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'cart:view_cart' %}">
+              <a
+                class="nav-link position-relative"
+                href="{% url 'cart:view_cart' %}"
+                aria-label="View shopping cart"
+              >
                 <i class="bi bi-cart3"></i>
 
                 {% if product_count > 0 %}
-                <span class="badge bg-success">
-                  {{ product_count }}
-                </span>
+                  <span class="badge bg-success">
+                    {{ product_count }}
+                  </span>
                 {% endif %}
               </a>
             </li>
 
-            {% if user.is_authenticated %}
-
-            <li class="nav-item">
-              <span class="nav-link">
-                Welcome, {{ user.username }}
-              </span>
-            </li>
-
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="{% url 'profile_detail' %}"
-              >
-                My Profile
-              </a>
-            </li>
-
-            <li class="nav-item ms-lg-2">
-              <a
-                href="{% url 'account_logout' %}"
-                class="btn btn-success"
-              >
-                Logout
-              </a>
-            </li>
-
-            {% else %}
-
-            <li class="nav-item ms-lg-2">
-              <a
-                href="{% url 'account_login' %}"
-                class="btn btn-success"
-              >
-                Login
-              </a>
-            </li>
-
-            <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-              <a
-                href="{% url 'account_signup' %}"
-                class="btn hero-secondary-btn"
-              >
-                Sign Up
-              </a>
-            </li>
-
-            {% endif %}
           </ul>
         </div>
       </div>
     </nav>
 
     {% if messages %}
-    <div class="container mt-3">
-      {% for message in messages %}
-      <div
-        class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show"
-        role="alert"
-      >
-        {{ message }}
+      <div class="container mt-3">
 
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
+        {% for message in messages %}
+          <div
+            class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show"
+            role="alert"
+          >
+            {{ message }}
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        {% endfor %}
+
       </div>
-      {% endfor %}
-    </div>
     {% endif %}
 
     <main class="flex-grow-1">
@@ -224,6 +268,7 @@
     <!-- Footer -->
     <footer class="site-footer mt-auto">
       <div class="footer-container">
+
         <div class="footer-column">
           <h3 class="footer-logo">
             NutriFit Healthy
@@ -236,7 +281,9 @@
         </div>
 
         <div class="footer-column">
-          <h4>Explore</h4>
+          <h4>
+            Explore
+          </h4>
 
           <ul>
             <li>
@@ -260,14 +307,21 @@
         </div>
 
         <div class="footer-column">
-          <h4>Get in Touch</h4>
+          <h4>
+            Get in Touch
+          </h4>
 
           <ul>
-            <li>Email: hello@nutrifithealthy.com</li>
+            <li>
+              Email: hello@nutrifithealthy.com
+            </li>
 
-            <li>Instagram: @nutrifithealthy</li>
+            <li>
+              Instagram: @nutrifithealthy
+            </li>
           </ul>
         </div>
+
       </div>
 
       <div class="footer-bottom">
