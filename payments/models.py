@@ -1,5 +1,6 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 
 from nutrition.models import NutritionPlan
@@ -7,14 +8,29 @@ from workouts.models import WorkoutPlan
 
 
 class Order(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="orders",
+    )
+
     order_number = models.CharField(
         max_length=32,
         unique=True,
         editable=False,
     )
-    full_name = models.CharField(max_length=255)
+
+    full_name = models.CharField(
+        max_length=255,
+    )
+
     email = models.EmailField()
-    date = models.DateTimeField(auto_now_add=True)
+
+    date = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     order_total = models.DecimalField(
         max_digits=10,
@@ -73,7 +89,9 @@ class OrderItem(models.Model):
         blank=True,
     )
 
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(
+        default=1,
+    )
 
     line_total = models.DecimalField(
         max_digits=10,
@@ -118,7 +136,11 @@ class OrderItem(models.Model):
         order.update_total()
 
     def __str__(self):
-        plan_name = self.plan.name if self.plan else "Deleted plan"
+        plan_name = (
+            self.plan.name
+            if self.plan
+            else "Deleted plan"
+        )
 
         return (
             f"{plan_name} "

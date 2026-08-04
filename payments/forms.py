@@ -6,6 +6,7 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
+
         fields = (
             "full_name",
             "email",
@@ -19,7 +20,9 @@ class OrderForm(forms.ModelForm):
             "email": "Email Address",
         }
 
-        self.fields["full_name"].widget.attrs["autofocus"] = True
+        self.fields["full_name"].widget.attrs[
+            "autofocus"
+        ] = True
 
         for field_name, field in self.fields.items():
             placeholder = placeholders[field_name]
@@ -27,6 +30,12 @@ class OrderForm(forms.ModelForm):
             if field.required:
                 placeholder += " *"
 
-            field.widget.attrs["placeholder"] = placeholder
-            field.widget.attrs["class"] = "form-control"
+            field.widget.attrs[
+                "placeholder"
+            ] = placeholder
+
+            field.widget.attrs[
+                "class"
+            ] = "form-control"
+
             field.label = False

@@ -7,22 +7,29 @@ My Account | NutriFit Healthy
 {% block content %}
 
 <section class="py-5">
+
     <div class="container">
 
         <div class="row justify-content-center">
-            <div class="col-lg-9">
+
+            <div class="col-lg-10">
 
                 <div class="text-center mb-5">
+
                     <h1 class="hero-title">
                         My Account
                     </h1>
 
                     <p class="hero-subtitle">
-                        Manage your details and view your orders.
+                        Manage your account details and view your order history.
                     </p>
+
                 </div>
 
+                <!-- My Details -->
+
                 <div class="card feature-card mb-4">
+
                     <div class="card-body p-4">
 
                         <h2 class="h4 mb-4">
@@ -34,31 +41,47 @@ My Account | NutriFit Healthy
                             <div class="row">
 
                                 <div class="col-md-6 mb-4">
-                                    <h3 class="h6">Full Name</h3>
-                                    <p>{{ profile.full_name }}</p>
-                                </div>
 
-                                <div class="col-md-6 mb-4">
-                                    <h3 class="h6">Email Address</h3>
-                                    <p>{{ profile.email }}</p>
-                                </div>
-
-                                <div class="col-md-6 mb-4">
-                                    <h3 class="h6">Phone Number</h3>
+                                    <h6>Full Name</h6>
 
                                     <p>
+                                        {{ profile.full_name }}
+                                    </p>
+
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+
+                                    <h6>Email</h6>
+
+                                    <p>
+                                        {{ profile.email }}
+                                    </p>
+
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+
+                                    <h6>Phone Number</h6>
+
+                                    <p>
+
                                         {% if profile.phone_number %}
                                             {{ profile.phone_number }}
                                         {% else %}
-                                            No phone number saved.
+                                            Not provided
                                         {% endif %}
+
                                     </p>
+
                                 </div>
 
                                 <div class="col-md-6 mb-4">
-                                    <h3 class="h6">Address</h3>
+
+                                    <h6>Address</h6>
 
                                     <p>
+
                                         {{ profile.address_line_1 }}
 
                                         {% if profile.address_line_2 %}
@@ -67,17 +90,24 @@ My Account | NutriFit Healthy
                                         {% endif %}
 
                                         <br>
+
                                         {{ profile.town_or_city }}
+
                                         <br>
+
                                         {{ profile.postcode }}
+
                                         <br>
+
                                         {{ profile.country }}
+
                                     </p>
+
                                 </div>
 
                             </div>
 
-                            <div class="d-flex flex-column flex-sm-row gap-3">
+                            <div class="d-flex gap-3 flex-wrap">
 
                                 <a
                                     href="{% url 'profile_update' %}"
@@ -99,13 +129,8 @@ My Account | NutriFit Healthy
 
                             <div class="text-center py-4">
 
-                                <h3 class="h5 mb-3">
-                                    You have not added your details yet
-                                </h3>
-
-                                <p class="mb-4">
-                                    Save your contact and address information
-                                    for easier account management.
+                                <p>
+                                    You haven't added your account details yet.
                                 </p>
 
                                 <a
@@ -120,29 +145,161 @@ My Account | NutriFit Healthy
                         {% endif %}
 
                     </div>
+
                 </div>
+
+                <!-- My Orders -->
 
                 <div
                     id="my-orders"
                     class="card feature-card"
                 >
+
                     <div class="card-body p-4">
 
-                        <h2 class="h4 mb-3">
+                        <h2 class="h4 mb-4">
                             My Orders
                         </h2>
 
-                        <p class="text-muted mb-0">
-                            You do not have any orders yet.
-                        </p>
+                        {% if orders %}
+
+                            <div class="table-responsive">
+
+                                <table class="table table-hover align-middle">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>
+                                                Order Number
+                                            </th>
+
+                                            <th>
+                                                Date
+                                            </th>
+
+                                            <th>
+                                                Items
+                                            </th>
+
+                                            <th>
+                                                Total
+                                            </th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        {% for order in orders %}
+
+                                            <tr>
+
+                                                <td>
+
+                                                    <small>
+                                                        {{ order.order_number }}
+                                                    </small>
+
+                                                </td>
+
+                                                <td>
+
+                                                    {{ order.date|date:"d M Y" }}
+
+                                                </td>
+
+                                                <td>
+
+                                                    {% for item in order.items.all %}
+
+                                                        {% if item.nutrition_plan %}
+
+                                                            <div>
+
+                                                                {{ item.nutrition_plan.name }}
+                                                                ×
+                                                                {{ item.quantity }}
+
+                                                            </div>
+
+                                                        {% elif item.workout_plan %}
+
+                                                            <div>
+
+                                                                {{ item.workout_plan.name }}
+                                                                ×
+                                                                {{ item.quantity }}
+
+                                                            </div>
+
+                                                        {% endif %}
+
+                                                    {% empty %}
+
+                                                        <span class="text-muted">
+
+                                                            No items
+
+                                                        </span>
+
+                                                    {% endfor %}
+
+                                                </td>
+
+                                                <td>
+
+                                                    <strong>
+
+                                                        £{{ order.order_total }}
+
+                                                    </strong>
+
+                                                </td>
+
+                                            </tr>
+
+                                        {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        {% else %}
+
+                            <div class="text-center py-4">
+
+                                <i
+                                    class="bi bi-bag-x"
+                                    style="font-size:3rem;"
+                                ></i>
+
+                                <h5 class="mt-3">
+                                    No orders yet
+                                </h5>
+
+                                <p class="text-muted">
+                                    Your purchases will appear here after checkout.
+                                </p>
+
+                            </div>
+
+                        {% endif %}
 
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
     </div>
+
 </section>
 
 {% endblock %}

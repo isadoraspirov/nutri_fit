@@ -11,6 +11,7 @@ from django.shortcuts import (
 )
 from django.urls import reverse
 
+from accounts.models import CustomerProfile
 from nutrition.models import NutritionPlan
 from workouts.models import WorkoutPlan
 
@@ -29,7 +30,10 @@ def checkout(request):
     cart = request.session.get("cart", {})
 
     if not cart:
-        messages.error(request, "Your cart is empty.")
+        messages.error(
+            request,
+            "Your cart is empty.",
+        )
         return redirect("nutrition_home")
 
     if request.method == "POST":
@@ -38,11 +42,20 @@ def checkout(request):
         if order_form.is_valid():
             try:
                 with transaction.atomic():
-                    order = order_form.save()
+                    order = order_form.save(commit=False)
+
+                    # Link the order to the logged-in user.
+                    if request.user.is_authenticated:
+                        order.user = request.user
+
+                    order.save()
 
                     for item_key, quantity in cart.items():
                         try:
-                            item_type, plan_id = item_key.split("_", 1)
+                            item_type, plan_id = item_key.split(
+                                "_",
+                                1,
+                            )
                             plan_id = int(plan_id)
                             quantity = int(quantity)
 
@@ -141,7 +154,6 @@ def checkout(request):
                         )
                     )
 
-                    # Store the Stripe Checkout Session ID.
                     order.stripe_pid = checkout_session.id
                     order.save(
                         update_fields=["stripe_pid"]
@@ -153,7 +165,6 @@ def checkout(request):
                     "Stripe could not start the payment. "
                     "Please try again.",
                 )
-
                 return redirect("payments:checkout")
 
             except ValueError:
@@ -161,7 +172,6 @@ def checkout(request):
                     request,
                     "There was a problem processing your cart.",
                 )
-
                 return redirect("cart:view_cart")
 
             return redirect(
@@ -170,7 +180,28 @@ def checkout(request):
             )
 
     else:
-        order_form = OrderForm()
+        initial_data = {}
+
+        if request.user.is_authenticated:
+            profile = CustomerProfile.objects.filter(
+                user=request.user
+            ).first()
+
+            if profile:
+                initial_data = {
+                    "full_name": profile.full_name,
+                    "email": profile.email,
+                }
+
+            else:
+                initial_data = {
+                    "full_name": request.user.get_full_name(),
+                    "email": request.user.email,
+                }
+
+        order_form = OrderForm(
+            initial=initial_data
+        )
 
     context = {
         "order_form": order_form,
@@ -205,7 +236,9 @@ def checkout_success(request, order_number):
 
     try:
         checkout_session = (
-            stripe.checkout.Session.retrieve(session_id)
+            stripe.checkout.Session.retrieve(
+                session_id
+            )
         )
 
     except stripe.StripeError:
@@ -215,9 +248,17 @@ def checkout_success(request, order_number):
         )
         return redirect("nutrition_home")
 
-    stripe_order_number = checkout_session.metadata.get(
-        "order_number"
-    )
+    try:
+        stripe_order_number = (
+            checkout_session.metadata["order_number"]
+        )
+
+    except (KeyError, TypeError):
+        messages.error(
+            request,
+            "The Stripe order information is missing.",
+        )
+        return redirect("nutrition_home")
 
     if stripe_order_number != order.order_number:
         messages.error(
@@ -233,7 +274,6 @@ def checkout_success(request, order_number):
         )
         return redirect("cart:view_cart")
 
-    # Clear the cart only after Stripe confirms payment.
     request.session.pop("cart", None)
     request.session.modified = True
 

@@ -6,6 +6,8 @@ from django.shortcuts import (
     render,
 )
 
+from payments.models import Order
+
 from .forms import CustomerProfileForm
 from .models import CustomerProfile
 
@@ -13,14 +15,22 @@ from .models import CustomerProfile
 @login_required
 def profile_detail(request):
     """
-    Display the logged-in user's customer profile.
+    Display the logged-in user's customer profile and orders.
     """
     profile = CustomerProfile.objects.filter(
         user=request.user
     ).first()
 
+    orders = Order.objects.filter(
+        user=request.user
+    ).prefetch_related(
+        "items__nutrition_plan",
+        "items__workout_plan",
+    ).order_by("-date")
+
     context = {
         "profile": profile,
+        "orders": orders,
     }
 
     return render(
@@ -35,7 +45,9 @@ def profile_create(request):
     """
     Allow a logged-in user to create their customer profile.
     """
-    if CustomerProfile.objects.filter(user=request.user).exists():
+    if CustomerProfile.objects.filter(
+        user=request.user
+    ).exists():
         messages.info(
             request,
             "You already have saved account details.",
