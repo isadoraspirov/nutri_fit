@@ -3,6 +3,7 @@ from decimal import Decimal
 import stripe
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import (
     get_object_or_404,
@@ -22,6 +23,7 @@ from .models import Order, OrderItem
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+@login_required
 def checkout(request):
     """
     Display the checkout form, create an order and redirect
@@ -43,11 +45,7 @@ def checkout(request):
             try:
                 with transaction.atomic():
                     order = order_form.save(commit=False)
-
-                    # Link the order to the logged-in user.
-                    if request.user.is_authenticated:
-                        order.user = request.user
-
+                    order.user = request.user
                     order.save()
 
                     for item_key, quantity in cart.items():
@@ -104,6 +102,11 @@ def checkout(request):
 
                     for item in order.items.all():
                         plan = item.plan
+
+                        if plan is None:
+                            raise ValueError(
+                                "An order item is missing its plan."
+                            )
 
                         unit_amount = int(
                             plan.price * Decimal("100")
@@ -180,24 +183,25 @@ def checkout(request):
             )
 
     else:
-        initial_data = {}
+        initial_data = {
+            "email": request.user.email,
+        }
 
-        if request.user.is_authenticated:
-            profile = CustomerProfile.objects.filter(
-                user=request.user
-            ).first()
+        profile = CustomerProfile.objects.filter(
+            user=request.user
+        ).first()
 
-            if profile:
-                initial_data = {
-                    "full_name": profile.full_name,
-                    "email": profile.email,
-                }
+        if profile:
+            initial_data["full_name"] = profile.full_name
+            initial_data["email"] = profile.email
 
+        else:
+            full_name = request.user.get_full_name()
+
+            if full_name:
+                initial_data["full_name"] = full_name
             else:
-                initial_data = {
-                    "full_name": request.user.get_full_name(),
-                    "email": request.user.email,
-                }
+                initial_data["full_name"] = request.user.username
 
         order_form = OrderForm(
             initial=initial_data
@@ -215,6 +219,7 @@ def checkout(request):
     )
 
 
+@login_required
 def checkout_success(request, order_number):
     """
     Verify the Stripe Checkout Session and display the
@@ -223,6 +228,7 @@ def checkout_success(request, order_number):
     order = get_object_or_404(
         Order,
         order_number=order_number,
+        user=request.user,
     )
 
     session_id = request.GET.get("session_id")
@@ -250,7 +256,9 @@ def checkout_success(request, order_number):
 
     try:
         stripe_order_number = (
-            checkout_session.metadata["order_number"]
+            checkout_session.metadata[
+                "order_number"
+            ]
         )
 
     except (KeyError, TypeError):
