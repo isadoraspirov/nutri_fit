@@ -67,7 +67,7 @@
 .hero-section {
   position: relative;
   min-height: 85vh;
-  background-image: url("/static/images/nutrifit_imagehero.jpg");
+  background-image: url("/static/images/nutrifit_imagehero.webp");
   background-size: cover;
   background-position: center;
   display: flex;

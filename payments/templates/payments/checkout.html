@@ -24,12 +24,15 @@ Checkout | NutriFit Healthy
                         </h1>
 
                         <p>
-                            Enter your details to continue to payment.
+                            Review your details and continue to secure payment.
                         </p>
 
                     </div>
 
-                    <form method="POST" id="payment-form">
+                    <form
+                        method="POST"
+                        id="checkout-form"
+                    >
 
                         {% csrf_token %}
 
@@ -53,17 +56,31 @@ Checkout | NutriFit Healthy
 
                         {% if order_form.non_field_errors %}
 
-                            <div class="alert alert-danger">
+                            <div
+                                class="alert alert-danger"
+                                role="alert"
+                            >
 
                                 {% for error in order_form.non_field_errors %}
-                                    <p class="mb-0">{{ error }}</p>
+                                    <p class="mb-0">
+                                        {{ error }}
+                                    </p>
                                 {% endfor %}
 
                             </div>
 
                         {% endif %}
 
-                        <div class="d-flex justify-content-between mt-4">
+                        <div
+                            class="
+                                d-flex
+                                flex-column
+                                flex-sm-row
+                                justify-content-between
+                                gap-3
+                                mt-4
+                            "
+                        >
 
                             <a
                                 href="{% url 'cart:view_cart' %}"
