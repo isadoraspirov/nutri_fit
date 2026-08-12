@@ -1,3 +1,6 @@
+/* jshint esversion: 6 */
+/* global bootstrap */
+
 document.addEventListener("DOMContentLoaded", function () {
     /*
      * Automatically close Bootstrap/Django messages

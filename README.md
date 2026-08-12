@@ -693,5 +693,116 @@ Production security settings are enabled when `DEBUG` is disabled.
 
 Sensitive environment variables must never be committed to GitHub.
 
+### Django System Checks
 
+During development the project was checked using:
 
+```bash
+python manage.py check
+```
+
+Production configuration can additionally be reviewed with:
+
+```bash
+python manage.py check --deploy
+```
+
+### Manual Testing
+
+The application should be manually tested across its main functionality before final submission.
+
+![Manual Testing](static/images/manualtesting-nutrifit.webp)
+
+## User Stories Testing
+
+### User Story 1 — Register an Account
+
+- Registration page is accessible.
+- Valid account creation works.
+- Invalid data displays validation feedback.
+
+### User Story 2 — Log In and Log Out
+
+- Valid credentials allow authentication.
+- Invalid credentials display feedback.
+- Logout ends the authenticated session.
+
+### User Story 3 — Manage My Profile
+
+- Users can create personal details.
+- Saved details are displayed.
+- Details can be edited.
+- Details can be deleted without deleting order history.
+
+### User Story 4 — Browse Nutrition Plans
+
+- Nutrition plans display correctly.
+- Product information is visible.
+- Plans can be added to the cart.
+
+### User Story 5 — Browse Workout Plans
+
+- Workout plans display correctly.
+- Product information is visible.
+- Plans can be added to the cart.
+
+### User Story 6 — Manage Shopping Cart
+
+- Products appear in the cart.
+- Quantities update correctly.
+- Totals recalculate correctly.
+- Removal confirmation works.
+- Products can be removed.
+
+### User Story 7 — Complete Checkout
+
+- Checkout form displays.
+- Invalid input is rejected.
+- Valid details allow checkout to continue.
+
+### User Story 8 — Make a Secure Payment
+
+- Stripe Checkout opens successfully.
+- Test payment can be completed.
+- Successful payment redirects correctly.
+- Cart is cleared after successful payment.
+
+### User Story 9 — View My Order History
+
+- Authenticated users can access their orders.
+- Order number, date, products, quantities, and total are displayed.
+- Orders are associated with the appropriate user.
+
+### User Story 10 — Responsive and Accessible Navigation
+
+- Main navigation works.
+- Account options change based on login state.
+- Mobile navigation works.
+- Cart is accessible from the navbar.
+
+## Automated Testing with Lighthouse
+
+Google Lighthouse was used to evaluate the deployed application for:
+
+- Performance
+- Accessibility
+- Best Practices
+- SEO
+
+During optimisation, large images were converted/resized to WebP, significantly improving the Performance score.
+
+![Lighthouse Testing](static/images/lighthousetesting-nutrifit.webp)
+
+## HTML, CSS and JavaScript Validation
+
+The final application should be checked using:
+
+- W3C HTML Validator
+- W3C CSS Validator
+- JSHint or an equivalent JavaScript validation tool
+
+![HTML Validation](static/images/htmlvalidation-nutrifit.webp)
+
+![CSS Validation](static/images/cssvalidation-nutrifit.webp)
+
+![JavaScript Validation](static/images/javascriptvalidation-nutrifit.webp)
