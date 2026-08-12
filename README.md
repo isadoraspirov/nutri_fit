@@ -527,3 +527,171 @@ Custom JavaScript is used to:
 - Responsive cards, forms, tables, and footer.
 - Designed for desktop, tablet, and mobile screens.
 
+## Technologies Used
+
+### Languages
+
+- HTML5
+- CSS3
+- JavaScript
+- Python
+
+### Frameworks and Libraries
+
+- Django
+- Bootstrap 5
+- Django Allauth
+- Stripe 
+- Gunicorn
+- WhiteNoise
+
+### Database
+
+The application uses Django's database system. SQLite is suitable for local development, while the deployed application can use a production PostgreSQL database configured through the environment.
+
+### Media and Static Files
+
+- WebP images are used to improve image performance.
+- WhiteNoise serves static files in production.
+- Cloudinary is cloud-based image and media storage where required.
+
+### Django Application
+
+The project is divided into several Django applications:
+
+- `home`
+- `accounts`
+- `nutrition`
+- `workouts`
+- `cart`
+- `payments`
+
+## Home
+
+Manages the main page of the website, including the homepage and general introductory content about NutriFit Healthy.
+
+## Accounts 
+
+Handles user-related functionality, including user registration, login, logout, profile management, and account-related features.
+
+**CustomerProfile:** Stores personal details associated with an authenticated user.
+
+The profile is linked to the Django user account and supports create, read, update, and delete operations.
+
+## Nutrition Plan
+
+Manages the nutrition plans available on the website, including plan information such as descriptions, prices and duration.
+
+## Workout Plan
+
+Manages the workout plans offered by NutriFit Healthy, allowing users to view the available workout options and their details.
+
+## Cart
+
+Handles the shopping cart functionality, allowing users to add plans to their cart, view selected items, update their selections, and remove items before checkout.
+
+## Payment
+
+**Order:**
+
+Stores purchase information.
+
+Fields include:
+
+- User
+- Order number
+- Full name
+- Email
+- Date
+- Order total
+- Stripe Checkout Session ID (`stripe_pid`)
+
+The `user` field links an order to an authenticated account when applicable.
+
+**OrderItem:**
+
+Stores individual products belonging to an order.
+
+Fields include:
+
+- Order
+- Nutrition plan
+- Workout plan
+- Quantity
+- Line total
+
+An order item contains either a nutrition plan or a workout plan. The line total is calculated from the selected plan price and quantity.
+
+## Relationship
+
+- One Django User → zero or one CustomerProfile.
+- One User → many Orders.
+- One Order → many OrderItems.
+- One NutritionPlan → many OrderItems.
+- One WorkoutPlan → many OrderItems.
+
+### Project Management
+
+GitHub Projects was used to manage development tasks and user stories.
+
+The board used the following stages:
+
+- **To Do**
+- **In Progress**
+- **Done**
+
+During development, the scope of NutriFit Healthy evolved. Earlier ideas involving meal logging, workout entry editing, and progress tracking were replaced by functionality more appropriate to the final e-commerce application, including the shopping cart, Stripe checkout, customer profiles, and order history.
+
+This reflects an iterative Agile development process in which priorities were reviewed and user stories were updated as the application developed.
+
+![GitHub Project Board](static/images/githubprojectboard-nutrifit.webp)
+
+### Tools & Services
+
+## Development Tools
+
+- Git
+- GitHub
+- VS Code
+- Django Admin
+- Heroku
+- Stripe
+- Cloudinary
+- PostgreSQL 
+
+## Design Tools
+
+- Canva
+- AI image generation tools
+
+## Validation and Testing Tools
+
+- W3C HTML Validator
+- W3C CSS Validator
+- JSHint
+- Chrome DevTools
+- Lighthouse
+- Django system checks
+
+## Security
+
+NutriFit Healthy uses several Django and deployment security features:
+
+- CSRF protection on POST forms.
+- Django authentication and `login_required` protection for account-specific views.
+- Environment variables for sensitive configuration.
+- Stripe secret key stored outside source code `.env`.
+- Django `SECRET_KEY` stored as an environment variable.
+- `X_FRAME_OPTIONS = "DENY"` for clickjacking protection.
+- Secure cookies in production.
+- HTTPS redirection in production.
+- HSTS configuration in production.
+- Django form validation.
+- Server-side validation of cart and checkout information.
+
+Production security settings are enabled when `DEBUG` is disabled.
+
+Sensitive environment variables must never be committed to GitHub.
+
+
+
