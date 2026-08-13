@@ -1,5 +1,7 @@
 # NutriFit Healthy
 
+![Mockup](static/images/mockup-nutrifit.webp)
+
 ## Repository
 
 [GitHub Repository](https://github.com/isadoraspirov/nutri_fit)
@@ -805,4 +807,7 @@ The final application should be checked using:
 
 ![CSS Validation](static/images/cssvalidation-nutrifit.webp)
 
-![JavaScript Validation](static/images/javascriptvalidation-nutrifit.webp)
+![JavaScript Validation](static/images/jshintvalidation-nutrifit.webp)
+
+
+
