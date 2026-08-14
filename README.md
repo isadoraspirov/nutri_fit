@@ -41,7 +41,7 @@ NutriFit Healthy is a full-stack Django e-commerce website designed to help user
 
 The project was developed to demonstrate full-stack web development skills using Python, Django, HTML, CSS, JavaScript, Bootstrap, relational database models, authentication, form validation, session-based cart management, and third-party payment integration.
 
-Costumers can browse nutrition and workout plans, add products to their shopping cart, edit their order updating quantities, removing products, proceed through checkout, and complete a test payment using Stripe. Registered users can also create and manage their personal profile and view orders associated with their account.
+Customers can browse nutrition and workout plans, add products to their shopping cart, edit their order updating quantities, removing products, proceed through checkout, and complete a test payment using Stripe. Registered users can also create and manage their personal profile and view orders associated with their account.
 
 The application demonstrates CRUD functionality through customer profile management:
 
@@ -275,7 +275,7 @@ The project was managed using GitHub Projects. The original project concept evol
 
 **Story:**
 
-As a new user I want to create an account so that I can I can log in, manage my personal details, and access my order history.
+As a new user, I want to create an account so that I can log in, manage my personal details, and access my order history.
 
 **Acceptance Criteria:**
 
@@ -330,7 +330,7 @@ As a customer I want to browse available nutrition plans so that I can choose a 
 
 **Story:**
 
-As a costumer I want browse available workout plans so that I can select a training programme suitable for my goals.
+As a customer I want browse available workout plans so that I can select a training programme suitable for my goals.
 
 **Acceptance Criteria:**
 
@@ -343,7 +343,7 @@ As a costumer I want browse available workout plans so that I can select a train
 
 **Story:**
 
-As a costumer I want to manage the products in my shopping cart so that I can review and change my selections before purchasing.
+As a customer I want to manage the products in my shopping cart so that I can review and change my selections before purchasing.
 
 **Acceptance Criteria:**
 
@@ -359,7 +359,7 @@ As a costumer I want to manage the products in my shopping cart so that I can re
 
 **Story:**
 
-As a costumer I want to enter my details and proceed securely to checkout so that I can purchase my selected nutrition or workout plans.
+As a customer I want to enter my details and proceed securely to checkout so that I can purchase my selected nutrition or workout plans.
 
 **Acceptance Criteria:**
 
@@ -373,7 +373,7 @@ As a costumer I want to enter my details and proceed securely to checkout so tha
 
 **Story:**
 
-As a costumer I want to pay securely for my selected plans so that I can complete my purchase safely.
+As a customer I want to pay securely for my selected plans so that I can complete my purchase safely.
 
 **Acceptance Criteria:**
 
@@ -816,7 +816,7 @@ At the time of submission, the following limitations may remain:
 - Stripe is configured for test payments rather than live commercial transactions.
 - Payment confirmation is based on Stripe Checkout Session verification after the customer returns to the application; a production application should also use Stripe webhooks.
 - Purchased nutrition/workout content is not automatically delivered by email.
-- Password reset functionality is currently unavailable, so users who forget their password cannot reset it through the application.
+- Password reset pages are available through Django Allauth; however, production email delivery has not been configured, so password reset emails are not currently delivered to users.
 - Some third-party resources such as Bootstrap, Google Fonts, Stripe, and Bootstrap Icons may affect Lighthouse cache or unused-code diagnostics.
 - Account orders are displayed when they are associated with the authenticated user; purchases completed entirely as a guest are not automatically transferred to an account created later unless additional account-linking logic is implemented.
 
