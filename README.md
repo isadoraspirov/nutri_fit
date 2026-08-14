@@ -816,6 +816,7 @@ At the time of submission, the following limitations may remain:
 - Stripe is configured for test payments rather than live commercial transactions.
 - Payment confirmation is based on Stripe Checkout Session verification after the customer returns to the application; a production application should also use Stripe webhooks.
 - Purchased nutrition/workout content is not automatically delivered by email.
+- Password reset functionality is currently unavailable, so users who forget their password cannot reset it through the application.
 - Some third-party resources such as Bootstrap, Google Fonts, Stripe, and Bootstrap Icons may affect Lighthouse cache or unused-code diagnostics.
 - Account orders are displayed when they are associated with the authenticated user; purchases completed entirely as a guest are not automatically transferred to an account created later unless additional account-linking logic is implemented.
 
