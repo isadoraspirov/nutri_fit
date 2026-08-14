@@ -809,5 +809,183 @@ The final application should be checked using:
 
 ![JavaScript Validation](static/images/jshintvalidation-nutrifit.webp)
 
+## Known Issues
+
+At the time of submission, the following limitations may remain:
+
+- Stripe is configured for test payments rather than live commercial transactions.
+- Payment confirmation is based on Stripe Checkout Session verification after the customer returns to the application; a production application should also use Stripe webhooks.
+- Purchased nutrition/workout content is not automatically delivered by email.
+- Some third-party resources such as Bootstrap, Google Fonts, Stripe, and Bootstrap Icons may affect Lighthouse cache or unused-code diagnostics.
+- Account orders are displayed when they are associated with the authenticated user; purchases completed entirely as a guest are not automatically transferred to an account created later unless additional account-linking logic is implemented.
+
+## Future Features
+
+Planned improvements include:
+
+- Stripe webhook payment verification.
+- Email order confirmations.
+- Downloadable or account-accessible purchased plans.
+- Product search and filtering.
+- Nutrition goal tracking.
+- Workout progress tracking.
+- Reviews and ratings.
+- Subscription plans.
+- Saved favourites.
+- More detailed individual order pages.
+- Improved account recovery and password reset email flow.
+
+## Deployment
+
+NutriFit Healthy is deployed using Heroku.
+
+### Deployment Steps
+
+1. Create or log in to a Heroku account.
+2. Create a new Heroku application.
+3. Connect the application to the GitHub repository or deploy using Git.
+4. Configure the required environment variables.
+5. Configure the production database.
+6. Ensure `gunicorn` is included in `requirements.txt`.
+7. Ensure the project contains a valid `Procfile`.
+8. Run database migrations.
+9. Collect/serve static files using the configured production static-file setup.
+10. Deploy the application.
+11. Open the deployed website and perform final testing.
+
+### Procfile
+
+The project uses Gunicorn to serve Django in production:
+
+```text
+web: gunicorn config.wsgi
+```
+
+## Local Development
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/isadoraspirov/nutri_fit
+cd nutri_fit
+```
+
+### Create a Virtual Environment
+
+macOS/Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Windows:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Configure Environment Variables
+
+Create the required local environment configuration without committing sensitive keys to GitHub.
+
+### Run Migrations
+
+```bash
+python manage.py migrate
+```
+
+### Start the Development Server
+
+```bash
+python manage.py runserver
+```
+
+Then open the local Django development address shown in the terminal.
+
+## Environment Variables
+
+The application requires environment variables such as:
+
+```text
+SECRET_KEY=
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+DATABASE_URL=
+```
+
+Production configuration may also use an environment-based `DEBUG` setting depending on the final settings implementation.
+
+**Never place real secret keys or passwords in the README or commit them to GitHub.**
+
+## Fork Repository
+
+To create a personal copy of the repository:
+
+1. Open the GitHub repository.
+2. Select **Fork**.
+3. Choose the destination GitHub account.
+4. Clone the fork locally.
+5. Install dependencies and configure environment variables as described above.
+
+## Credits
+
+### Content
+
+NutriFit Healthy content was created for educational purposes as part of a full-stack web development project.
+
+### Media
+
+Project imagery includes AI-generated imagery created for the NutriFit Healthy design.
+
+### Technologies and Documentation
+
+Documentation and development resources used during the project include:
+
+- Django Documentation
+- Bootstrap Documentation
+- Stripe Documentation
+- Django Allauth Documentation
+- Cloudinary Documentation
+- Heroku Documentation
+
+### Icons
+
+Bootstrap Icons are used throughout the interface.
+
+## Artificial Intelligence Usage
+
+Artificial Intelligence tools were used during development as a supporting resource for planning, troubleshooting, documentation, and visual asset creation.
+
+AI assistance included:
+
+- Supporting the planning and refinement of user stories.
+- Helping troubleshoot Django errors during development.
+- Assisting with Stripe integration troubleshooting.
+- Supporting responsive and accessibility improvements.
+- Assisting with README structure and documentation.
+- Supporting the creation of AI-generated visual assets.
+
+AI suggestions were reviewed and adapted to the requirements of NutriFit Healthy. The application was manually implemented, tested, and reviewed during development.
+
+## License
+
+This project was created for educational purposes.
+
+## Acknowledgements
+
+Thanks to my tutor, Kevin Loughrey, throughout the development of NutriFit Healthy.
+
+
 
 
