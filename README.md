@@ -22,7 +22,6 @@
 - [User Stories](#user-stories)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Database Design](#database-design)
 - [Project Management](#project-management)
 - [Security](#security)
 - [Testing](#testing)
@@ -37,11 +36,11 @@
 
 ## Introduction
 
-NutriFit Healthy is a full-stack Django e-commerce website designed to help users achieve their fitness goal through offering nutrition and workout plans. The application combines health and fitness content with account management, shopping cart functionality, Stripe Checkout, order creation, and order history.
+NutriFit Healthy is a full-stack Django e-commerce website designed to help users achieve their health and fitness goals by offering nutrition and workout plans. The application combines health and fitness content with account management, shopping cart functionality, Stripe Checkout, order creation, and order history.
 
 The project was developed to demonstrate full-stack web development skills using Python, Django, HTML, CSS, JavaScript, Bootstrap, relational database models, authentication, form validation, session-based cart management, and third-party payment integration.
 
-Customers can browse nutrition and workout plans, add products to their shopping cart, edit their order updating quantities, removing products, proceed through checkout, and complete a test payment using Stripe. Registered users can also create and manage their personal profile and view orders associated with their account.
+Customers can browse nutrition and workout plans, add products to their shopping cart, update quantities, remove products, proceed through checkout, and complete a test payment using Stripe. Registered users can also create and manage their personal profile and view orders associated with their account.
 
 The application demonstrates CRUD functionality through customer profile management:
 
@@ -61,8 +60,7 @@ The application demonstrates CRUD functionality through customer profile managem
 - Integrate Stripe Checkout for test payments.
 - Create and store customer orders.
 - Allow registered users to view their order history.
-- Use JavaScript to improve user interaction while purchasing to prevent users delete items accidentally.
-- Apply form validation and security features.
+- Use JavaScript to improve user interaction and help prevent users from accidentally removing items from their cart.
 - Deploy the completed Django application to Heroku.
 
 ## Business Goals
@@ -200,6 +198,7 @@ The website guides users from discovering NutriFit Healthy to selecting and purc
 - Login.
 - Logout.
 - Authentication validation and feedback.
+- Users are required to log in before completing checkout so that completed orders can be associated with their account and displayed in order history.
 
 ### Footer
 
@@ -288,7 +287,7 @@ As a new user, I want to create an account so that I can log in, manage my perso
 
 **Story:**
 
-As a registered user I want to log in and log out securely so that I can access my saved information.
+As a registered user, I want to log in and log out securely so that I can access my saved information.
 
 **Acceptance Criteria:**
 
@@ -302,7 +301,7 @@ As a registered user I want to log in and log out securely so that I can access 
 
 **Story:**
 
-As a logged-in user I want to create, view, update, and delete my personal details so that I can manage the information associated with my account.
+As a logged-in user, I want to create, view, update, and delete my personal details so that I can manage the information associated with my account.
 
 **Acceptance Criteria:**
 
@@ -317,7 +316,7 @@ As a logged-in user I want to create, view, update, and delete my personal detai
 
 **Story:**
 
-As a customer I want to browse available nutrition plans so that I can choose a plan that supports my health and nutrition goals.
+As a customer, I want to browse available nutrition plans so that I can choose a plan that supports my health and nutrition goals.
 
 **Acceptance Criteria:**
 
@@ -330,7 +329,7 @@ As a customer I want to browse available nutrition plans so that I can choose a 
 
 **Story:**
 
-As a customer I want browse available workout plans so that I can select a training programme suitable for my goals.
+As a customer, I want to browse available workout plans so that I can select a training programme suitable for my goals.
 
 **Acceptance Criteria:**
 
@@ -343,7 +342,7 @@ As a customer I want browse available workout plans so that I can select a train
 
 **Story:**
 
-As a customer I want to manage the products in my shopping cart so that I can review and change my selections before purchasing.
+As a customer, I want to manage the products in my shopping cart so that I can review and change my selections before purchasing.
 
 **Acceptance Criteria:**
 
@@ -359,7 +358,7 @@ As a customer I want to manage the products in my shopping cart so that I can re
 
 **Story:**
 
-As a customer I want to enter my details and proceed securely to checkout so that I can purchase my selected nutrition or workout plans.
+As a customer, I want to enter my details and proceed securely to checkout so that I can purchase my selected nutrition or workout plans.
 
 **Acceptance Criteria:**
 
@@ -373,7 +372,7 @@ As a customer I want to enter my details and proceed securely to checkout so tha
 
 **Story:**
 
-As a customer I want to pay securely for my selected plans so that I can complete my purchase safely.
+As a customer, I want to pay securely for my selected plans so that I can complete my purchase safely.
 
 **Acceptance Criteria:**
 
@@ -388,7 +387,7 @@ As a customer I want to pay securely for my selected plans so that I can complet
 
 **Story:**
 
-As a registered user I want to view my previous orders so that I can keep track of the plans I have purchased.
+As a registered user, I want to view my previous orders so that I can keep track of the plans I have purchased.
 
 **Acceptance Criteria:**
 
@@ -404,7 +403,7 @@ As a registered user I want to view my previous orders so that I can keep track 
 
 **Story:**
 
-As a user I want to navigate NutriFit easily on different devices so that I can access the website regardless of the device I am using.
+As a user, I want to navigate NutriFit easily on different devices so that I can access the website regardless of the device I am using.
 
 **Acceptance Criteria:**
 
@@ -549,7 +548,7 @@ Custom JavaScript is used to:
 
 ### Database
 
-The application uses Django's database system. SQLite is suitable for local development, while the deployed application can use a production PostgreSQL database configured through the environment.
+PostgreSQL is used as the application's database. The deployed Heroku application uses Heroku Postgres, configured through the DATABASE_URL environment variable using dj-database-url.
 
 ### Media and Static Files
 
@@ -557,7 +556,7 @@ The application uses Django's database system. SQLite is suitable for local deve
 - WhiteNoise serves static files in production.
 - Cloudinary is cloud-based image and media storage where required.
 
-### Django Application
+### Django Application and Models
 
 The project is divided into several Django applications:
 
@@ -632,7 +631,7 @@ An order item contains either a nutrition plan or a workout plan. The line total
 - One NutritionPlan → many OrderItems.
 - One WorkoutPlan → many OrderItems.
 
-### Project Management
+## Project Management
 
 GitHub Projects was used to manage development tasks and user stories.
 
@@ -648,9 +647,9 @@ This reflects an iterative Agile development process in which priorities were re
 
 ![GitHub Project Board](static/images/githubprojectboard-nutrifit.webp)
 
-### Tools & Services
+## Tools & Services
 
-## Development Tools
+### Development Tools
 
 - Git
 - GitHub
@@ -661,12 +660,12 @@ This reflects an iterative Agile development process in which priorities were re
 - Cloudinary
 - PostgreSQL 
 
-## Design Tools
+### Design Tools
 
 - Canva
 - AI image generation tools
 
-## Validation and Testing Tools
+### Validation and Testing Tools
 
 - W3C HTML Validator
 - W3C CSS Validator
@@ -711,7 +710,7 @@ python manage.py check --deploy
 
 ### Manual Testing
 
-The application should be manually tested across its main functionality before final submission.
+The application was manually tested across its main functionality to ensure that features behaved as expected.
 
 ![Manual Testing](static/images/manualtesting-nutrifit.webp)
 
@@ -797,7 +796,7 @@ During optimisation, large images were converted/resized to WebP, significantly 
 
 ## HTML, CSS and JavaScript Validation
 
-The final application should be checked using:
+The final application was checked using:
 
 - W3C HTML Validator
 - W3C CSS Validator
@@ -818,7 +817,6 @@ At the time of submission, the following limitations may remain:
 - Purchased nutrition/workout content is not automatically delivered by email.
 - Password reset pages are available through Django Allauth; however, production email delivery has not been configured, so password reset emails are not currently delivered to users.
 - Some third-party resources such as Bootstrap, Google Fonts, Stripe, and Bootstrap Icons may affect Lighthouse cache or unused-code diagnostics.
-- Account orders are displayed when they are associated with the authenticated user; purchases completed entirely as a guest are not automatically transferred to an account created later unless additional account-linking logic is implemented.
 
 ## Future Features
 
@@ -913,7 +911,10 @@ Then open the local Django development address shown in the terminal.
 
 ## Environment Variables
 
-The application requires environment variables such as:
+NutriFit Healthy uses environment variables to keep sensitive configuration
+values outside the source code.
+
+The following environment variables are required:
 
 ```text
 SECRET_KEY=
