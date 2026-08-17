@@ -220,7 +220,7 @@ When the user is logged out, the My Account menu provides:
 
 **Login | Sign Up**
 
-When the user is authenticated, it provides in dropdown menu:
+When the user is authenticated, the My Account dropdown provides:
 
 **My Details | My Orders | Logout**
 
@@ -323,7 +323,7 @@ As a customer, I want to browse available nutrition plans so that I can choose a
 - Available nutrition plans are displayed clearly.
 - Each plan provides relevant information such as name, description and price.
 - Users can select a nutrition plan.
--  Users can add a selected plan to their shopping cart.
+- Users can add a selected plan to their shopping cart.
 
 ### User Story 5 — Browse Workout Plans
 
@@ -567,11 +567,11 @@ The project is divided into several Django applications:
 - `cart`
 - `payments`
 
-## Home
+### Home
 
 Manages the main page of the website, including the homepage and general introductory content about NutriFit Healthy.
 
-## Accounts 
+### Accounts 
 
 Handles user-related functionality, including user registration, login, logout, profile management, and account-related features.
 
@@ -579,19 +579,19 @@ Handles user-related functionality, including user registration, login, logout, 
 
 The profile is linked to the Django user account and supports create, read, update, and delete operations.
 
-## Nutrition Plan
+### Nutrition Plan
 
 Manages the nutrition plans available on the website, including plan information such as descriptions, prices and duration.
 
-## Workout Plan
+### Workout Plan
 
 Manages the workout plans offered by NutriFit Healthy, allowing users to view the available workout options and their details.
 
-## Cart
+### Cart
 
 Handles the shopping cart functionality, allowing users to add plans to their cart, view selected items, update their selections, and remove items before checkout.
 
-## Payment
+### Payment
 
 **Order:**
 
@@ -623,7 +623,7 @@ Fields include:
 
 An order item contains either a nutrition plan or a workout plan. The line total is calculated from the selected plan price and quantity.
 
-## Relationship
+## Relationships
 
 - One Django User → zero or one CustomerProfile.
 - One User → many Orders.
@@ -658,7 +658,7 @@ This reflects an iterative Agile development process in which priorities were re
 - Heroku
 - Stripe
 - Cloudinary
-- PostgreSQL 
+- PostgreSQL
 
 ### Design Tools
 
@@ -681,7 +681,7 @@ NutriFit Healthy uses several Django and deployment security features:
 - CSRF protection on POST forms.
 - Django authentication and `login_required` protection for account-specific views.
 - Environment variables for sensitive configuration.
-- Stripe secret key stored outside source code `.env`.
+- Stripe secret keys are stored in environment variables and are not committed to source control.
 - Django `SECRET_KEY` stored as an environment variable.
 - `X_FRAME_OPTIONS = "DENY"` for clickjacking protection.
 - Secure cookies in production.
@@ -707,6 +707,7 @@ Production configuration can additionally be reviewed with:
 ```bash
 python manage.py check --deploy
 ```
+## Testing
 
 ### Manual Testing
 
@@ -916,8 +917,10 @@ values outside the source code.
 
 The following environment variables are required:
 
+
 ```text
 SECRET_KEY=
+DEBUG=
 STRIPE_PUBLIC_KEY=
 STRIPE_SECRET_KEY=
 CLOUDINARY_CLOUD_NAME=
@@ -926,7 +929,7 @@ CLOUDINARY_API_SECRET=
 DATABASE_URL=
 ```
 
-Production configuration may also use an environment-based `DEBUG` setting depending on the final settings implementation.
+DEBUG is configured through an environment variable. It should be set to True during local development when debugging is required and False in the deployed production environment.
 
 **Never place real secret keys or passwords in the README or commit them to GitHub.**
 
